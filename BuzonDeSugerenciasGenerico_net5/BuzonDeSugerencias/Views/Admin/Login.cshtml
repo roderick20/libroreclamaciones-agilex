@@ -1,0 +1,79 @@
+﻿@{ 
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UCSM - Libro virtual de Reclamaciones</title>
+    <link href="/theme/vendor/@@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    <link href="/theme/css/pixel.css" rel="stylesheet" />
+    @*<link rel="shortcut icon" href="https://www.ucsm.edu.pe/pucsm/wp-content/uploads/2016/06/favicon.png" />*@
+</head>
+<body>
+
+    <main>
+
+        <section class="min-vh-100 d-flex align-items-center bg-soft">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 d-flex align-items-center justify-content-center">
+                        <div class="signin-inner mt-3 mt-lg-0 bg-white shadow-soft border rounded border-light p-4 p-lg-5 w-100 fmxw-500">
+                            <div class="text-center text-md-center mb-4 mt-md-0">
+                                <a href="@ViewBag.Url"><img src="@ViewBag.Logo" style="width: 200px;" /></a>
+                            </div>
+
+                                <form asp-action="Login" class="mt-4">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <div class="form-group">
+                                        <div class="input-group mb-4">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><span class="fas fa-envelope"></span></span>
+                                            </div>
+                                            <input class="form-control" name="email" placeholder="Correo electrónico" type="text" aria-label="email adress" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group mb-4">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><span class="fas fa-unlock-alt"></span></span>
+                                            </div>
+                                            <input class="form-control" name="password" placeholder="Contraseña" type="password" aria-label="Password" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group mb-4">
+                                            <div class="input-group-prepend">
+                                                <img id="img-captcha" src="get-captcha-image" />
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="(*) Captcha Code" name="CaptchaCode" maxlength="4" required />
+                                            <div class="input-group-prepend">
+                                                <span id="img-captcha-b" class="btn btn-primary"><i class="fas fa-sync-alt"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-block btn-primary">Ingresar</button>
+                                    
+                                </form>
+</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/site.js?v=4q1jwFhaPaZgr8WAUSrux6hAuh0XDg9kPS3xIVq36I0"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#img-captcha-b").click(function () {
+                d = new Date();
+                $("#img-captcha").attr("src", "/get-captcha-image?" + d.getTime());
+            });
+        });
+    </script>
+</body>
+</html>

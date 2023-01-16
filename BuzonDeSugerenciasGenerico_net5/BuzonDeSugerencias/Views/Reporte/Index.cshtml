@@ -1,0 +1,53 @@
+﻿@model BuzonDeSugerencias.Models.Solicitud
+<main style="min-height:500px;">
+    <div class="section overflow-hidden">
+        <div class="container z-2">
+
+
+            <h4 style="margin-top: 0.5rem;">Reportes</h4>
+            <hr style="margin-top: 0.5rem; margin-bottom: 0.5rem;" />
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <form asp-action="Index">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="Id" />
+
+                            <div class="form-group row mb-0">
+                                <label class="col-12 col-sm-12 col-md-3 col-xl-3 col-lg-3 col-form-label text-right pb-0" for="fechaInicio">Fecha de Inicio:</label>
+                                <input class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-form-label pb-0 form-control form-control-sm" name="fechaInicio" id="fechaInicio" required/>
+                                <label class="col-12 col-sm-12 col-md-3 col-xl-3 col-lg-3 col-form-label text-right pb-0" for="Apellidos">Fecha de Fin:</label>
+                                <input class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-form-label pb-0 form-control form-control-sm" name="fechaFin" id="fechaFin" required/>
+                            </div>
+                            
+                            <div class="form-group text-right mt-2">
+                                <input type="submit" value="Generar Excel" class="btn btn-primary btn-xs" />
+                            </div>
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</main>
+
+@section scripts{ 
+
+    <link href="~/datepicker/css/bootstrap-datepicker3.css" rel="stylesheet" />
+    <script src="~/datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="~/datepicker/locales/bootstrap-datepicker.es.min.js"></script>
+
+    <script>
+        $('#fechaInicio').datepicker({
+            language: "es",
+            autoclose: true
+        });
+        $('#fechaFin').datepicker({
+            language: "es",
+            autoclose: true
+        });
+    </script>
+}

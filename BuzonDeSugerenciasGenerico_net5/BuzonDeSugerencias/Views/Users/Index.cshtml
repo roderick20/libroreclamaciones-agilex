@@ -1,0 +1,102 @@
+﻿<main style="min-height:500px;">
+    <div class="section overflow-hidden">
+        <div class="container z-2">
+            <h3 style="margin-top: 0.5rem;">Usuarios</h3>
+            <hr style="margin-top: 0.5rem; margin-bottom: 0.5rem;" />
+            <p>
+                <a class="btn btn-primary btn-sm" href="/Users/Create" >
+                Agregar un nuevo usuario</a> 
+            </p>
+            <table class="table table-sm table-bordered" id="listTable">
+                <thead>
+                    <tr>
+
+                        @*<th>
+                            Tipo doc.
+                        </th>
+                        <th>
+                            N&#xFA;mero doc.
+                        </th>*@
+                        <th>
+                            Nombre
+                        </th>
+                        <th>
+                            Email
+                        </th>
+                        @*<th>
+                            Celular
+                        </th>
+                        <th>
+                            Telefono
+                        </th>*@
+
+
+                        <th>
+                            Habilitado
+                        </th>
+                        <th>
+                            Recibe Email
+                        </th>
+                        <th>
+                            Es Admin
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+
+
+
+
+        </div>
+    </div>
+</main>
+
+@section scripts{
+
+
+
+    <link href="/lib/DataTables/datatables.css" rel="stylesheet" />
+    <script src="/lib/DataTables/datatables.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var table = $('#listTable').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "order": [[2, "asc"]],
+                "language": {
+                    "url": "/lib/DataTables/spanish.json"
+                },
+                select: true,
+                "ajax": {
+                    "url": "/Users/IndexData",
+                    "type": "POST",
+                    "data": {}
+                },
+                "columns": [
+                    //{ "data": "TypeDoc" },
+                    //{ "data": "NumberDoc" },
+                    { "data": "Name" },
+                    { "data": "Email" },
+                    //{ "data": "CellPhone" },
+                    //{ "data": "Phone" },
+                    { "data": "Enabled" },
+                    { "data": "RecibeEmail" },
+                     { "data": "IsAdmin" },
+                    {
+                        "className": "no-wrap text-center",
+                        "render": function (data, type, full, meta) {
+                            return '<a class="mr-1" href="/Users/Edit/' + full.Id + '" title="Editar"><i class="fas fa-edit text-info"></i></a>';
+                                //'<a class="mr-1" href="/Users/Details/' + full.Id + '" title="Detalle"><i class="fas fa-edit text-info"></i></a>' +
+                                //'<a class="mr-1" href="/Users/Delete/' + full.Id + '" title="Eliminar"><i class="fas fa-trash text-danger"></i></a>';
+                        }
+                    },
+                ]
+            });
+        });
+    </script>
+
+}

@@ -1,0 +1,96 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@{ 
+    int isadmin = Convert.ToInt32(HttpContextAccessor.HttpContext.Session.GetInt32("IsAdmin"));
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UCSM</title>
+    <link href="/theme/vendor/@@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    <link href="/theme/css/pixel.css" rel="stylesheet" />
+    @*<link rel="shortcut icon" href="https://www.ucsm.edu.pe/pucsm/wp-content/uploads/2016/06/favicon.png" />*@
+</head>
+<body>
+    <header class="header-global ">
+        <nav id="navbar-main" aria-label="Primary navigation" class="navbar navbar-main navbar-expand-lg navbar-theme-primary headroom navbar-dark  bg-primary">
+            <div class="container position-relative">
+                <a class="navbar-brand mr-lg-5" href="#">
+                    @*<img src="/imagen/logo2019.png" />*@
+                </a>
+                <div class="navbar-collapse collapse" id="navbar_global">
+                    <div class="navbar-collapse-header">
+                        <div class="row">
+                            @*<img src="/imagen/logo2019.png" />*@
+                        </div>
+                    </div>
+                    <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Solicituds">
+                                <span class="nav-link-inner-text">Hoja de reclamos</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Reporte">
+                                <span class="nav-link-inner-text">Reportes </span>
+                            </a>
+                        </li>
+                        @if (isadmin == 1)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Users">
+                                    <span class="nav-link-inner-text">Usuarios </span>
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <div class="d-flex align-items-center">
+
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-outline-soft animate-up-2"><span class="far fa-user mr-2"></span> @HttpContextAccessor.HttpContext.Session.GetString("UserName")</button>
+                        <button type="button" class="btn btn-outline-soft animate-up-2 dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="fas fa-angle-down dropdown-arrow"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu" style="">
+                            <a class="dropdown-item" href="/ActualizarPassword">Cambiar Contraseña</a>
+                            <a class="dropdown-item" href="/Logout">Salir</a>                            
+                        </div>
+                    </div>                                       
+                </div>
+            </div>
+        </nav>
+    </header>
+    @RenderBody()
+    <footer class="footer pt-7 pb-6 bg-primary text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col mb-md-0">
+                    <div class="d-flex text-center justify-content-center align-items-center" role="contentinfo">
+                        <p class="font-weight-normal font-small mb-0">
+                            Libro de reclamaciones
+                            @*©2021 Universidad Católica de Santa María. Todos los derechos reservados.
+                            <a href="https://www.ucsm.edu.pe/" style="text-decoration: none; color: #f8aa1a;">UCSM</a>*@
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/theme/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="/theme/vendor/popper.js/dist/umd/popper.min.js"></script>
+    <script src="/theme/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/theme/vendor/headroom.js/dist/headroom.min.js"></script>
+    <script src="/theme/vendor/jarallax/dist/jarallax.min.js"></script>
+    <script src="/theme/vendor/smooth-scroll/dist/smooth-scroll.min.js"></script>
+    <script src="/theme/assets/js/pixel.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

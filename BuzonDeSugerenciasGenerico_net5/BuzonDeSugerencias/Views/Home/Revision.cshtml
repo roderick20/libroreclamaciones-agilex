@@ -1,0 +1,142 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UCSM - Hoja de Reclamaciones</title>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="/theme/vendor/@@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="https://www.ucsm.edu.pe/pucsm/wp-content/uploads/2016/06/favicon.png" />
+    <meta name="author" content="Universidad Católica de Santa María" />
+    <meta name="description" content="La UCSM es la primera universidad particular de provincias con 59 años de vida académica formando profesionales con valores éticos." />
+    <meta name="robots" content="noodp" />
+    <meta name="keywords" content="UCSM, universidad católica de santa maría, educación superior, universidad católica arequipa" />
+    <link rel="canonical" href="https://www.ucsm.edu.pe/" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Universidad Católica de Santa María" />
+    <meta property="og:description" content="La UCSM es la primera universidad particular de provincias con 59 años de vida académica formando profesionales con valores éticos." />
+    <meta property="og:url" content="https://www.ucsm.edu.pe/" />
+</head>
+<body>
+    <div class="container">
+        <div class="row mt-3">
+            <div class="col-12 col-sm-12 col-lg-3 col-md-3 col-xl-3">
+                <a href="https://www.ucsm.edu.pe/"><img src="@ViewBag.Logo" style="width: 200px;" /></a>
+            </div>
+            <div class="col-12 col-sm-12 col-lg-9 col-md-9 col-xl-9 text-right"><h3 class="m-3" style="        color: #1d2528 !important;">Hoja de Reclamaciones</h3> </div>
+        </div>
+        <!--2000x200-->
+        <div style="background-image: url(@ViewBag.Banner);
+background-repeat: no-repeat;
+background-position: center top; padding:20px;color:white;margin-top:15px;font-size:1.2rem;">
+
+            Razón Social: @ViewBag.Empresa<br />
+            RUC: @ViewBag.RUC<br />
+            Dirección: @ViewBag.Direcion
+
+        </div>
+        <hr style="        color: #1d2528 !important;" />
+        <div class="row">
+            <div class="col-6">
+                @{
+                    //var format = "dddd, dd {0} MMMM de yyyy";
+                    //var result = DateTime.Now.ToString(format, new System.Globalization.CultureInfo("es-ES"));
+                    var result = DateTime.Now.ToString("D", new System.Globalization.CultureInfo("es-ES"));
+
+                }
+                @result.Substring(0, 1).ToUpper()@result.Substring(1)
+            </div>
+            <div class="col-6 text-right">
+                <a href="/">Regresar </a>
+            </div>
+        </div>
+        <hr style="color: #727272 !important;" />
+        <div class="container" style="min-height:700px">
+            <div class="row">
+                <div class="col-12">
+
+                    <form asp-action="Revision">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+                        <div class="form-group row">
+                            <label class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-form-label text-xs-left text-sm-left text-md-left text-lg-right text-xl-right" for="Numero">Número de reclamo:</label>
+                            <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                                <input class="form-control form-control-sm" type="text" data-val="true" data-val-required="Campo es obligatorio" id="Numero" name="Numero" value="@ViewBag.Numero" />
+                                <span class="text-danger field-validation-valid" data-valmsg-for="Numero" data-valmsg-replace="true"></span>
+                            </div>
+                            <label class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-form-label text-xs-left text-sm-left text-md-left text-lg-right text-xl-right" for="Email">Correo Electrónico:</label>
+                            <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                                <input class="form-control form-control-sm" type="text" data-val="true" data-val-required="Campo es obligatorio" id="Email" name="Email" value="@ViewBag.Email" />
+                                <span class="text-danger field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group row">
+                            <label class="col-12 col-sm-12 col-md-3 col-xl-3 col-lg-3 col-form-label text-right"></label>
+                            <div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 mt-2">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <img id="img-captcha" src="/get-captcha-image" />
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="(*) Captcha Code" name="CaptchaCode" maxlength="4" required />
+                                    <div class="input-group-prepend">
+                                        <span id="img-captcha-b" class="btn btn-primary"><i class="fas fa-sync-alt"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 mt-2  text-right">
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Enviar</button>
+                            </div>
+                        </div>
+
+
+                        @if (ViewBag.Mensaje != null)
+                        {
+
+                            <div class="form-group row">
+                                <label class="col-12 col-sm-12 col-md-3 col-xl-3 col-lg-3 col-form-label text-right" for="Descripcion">Respuesta:</label>
+                                <div class="col-sm-12 col-sm-12 col-md-9 col-lg-9 col-xl-9">
+                                    <textarea class="form-control form-control-sm" data-val="true" data-val-required="Campo es obligatorio" id="Descripcion" name="Descripcion" disabled>@ViewBag.Mensaje</textarea>
+
+                                </div>
+                            </div>
+                        }
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <footer class="border-top footer text-muted pt-5 pb-5" style="background-color: #1d2528;">
+        <div class="container" text-align="right">
+            ©2021 @ViewBag.NombreComercial. Todos los derechos reservados.
+        </div>
+    </footer>
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/site.js?v=4q1jwFhaPaZgr8WAUSrux6hAuh0XDg9kPS3xIVq36I0"></script>
+
+    <script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#img-captcha-b").click(function () {
+                d = new Date();
+                $("#img-captcha").attr("src", "/get-captcha-image?" + d.getTime());
+            });
+        });
+    </script>
+
+</body>
+</html>
+

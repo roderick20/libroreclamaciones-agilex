@@ -1,0 +1,110 @@
+﻿@model BuzonDeSugerencias.Models.Solicitud
+<main style="min-height:500px;">
+    <div class="section overflow-hidden">
+        <div class="container z-2">
+
+
+            <h4 style="margin-top: 0.5rem;">Hoja de reclamo</h4>
+            <hr style="margin-top: 0.5rem; margin-bottom: 0.5rem;" />
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <form asp-action="Edit">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="Id" />
+
+                            <div class="form-group row mb-0">
+                                <label class="col-12 col-sm-12 col-md-3 col-xl-3 col-lg-3 col-form-label text-right pb-0" for="Nombres"><b>Nombres:</b></label>
+                                <label class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-form-label pb-0">@Model.ApellidoPaterno</label>
+                                <label class="col-12 col-sm-12 col-md-3 col-xl-3 col-lg-3 col-form-label text-right pb-0" for="Apellidos"><b>Apellidos:</b></label>
+                                <label class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-form-label pb-0">@Model.ApellidoPaterno @Model.ApellidoMaterno</label>
+                            </div>
+                            <div class="form-group row mb-0">
+                                <label class="col-12 col-sm-12 col-md-3 col-xl-3 col-lg-3 col-form-label text-right pb-0" for="Correo"><b>Correo Electrónico:</b></label>
+                                <label class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-form-label pb-0">@Model.Correo</label>
+                                <label class="col-12 col-sm-12 col-md-3 col-xl-3 col-lg-3 col-form-label text-right pb-0" for="Telefono"><b>Teléfono / Celular:</b></label>
+                                <label class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-form-label pb-0">@Model.Telefono</label>
+                            </div>
+                            <div class="form-group row mb-0">
+                                <label class="col-12 col-sm-12 col-md-3 col-xl-3 col-lg-3 col-form-label text-right pb-0" for="Domicilio"><b>Domicilio:</b></label>
+                                <label class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-form-label pb-0">@Model.Domicilio</label>
+                            </div>
+                            <div class="form-group row mb-0">
+                                <label class="col-12 col-sm-12 col-md-3 col-xl-3 col-lg-3 col-form-label text-right pb-0" for="TipoDoc"><b>Tipo de Documento:</b></label>
+                                @{
+                                    var TipoDoc = Model.TipoDoc == 1 ? "DNI" : "Carnet de Extranjería";
+                                }
+                                <label class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-form-label pb-0">@TipoDoc</label>
+                                <label class="col-12 col-sm-12 col-md-3 col-xl-3 col-lg-3 col-form-label text-right pb-0" for="Dni"><b>Documento:</b></label>
+                                <label class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-form-label">@Model.Dni</label>
+                            </div>
+                            <div class="form-group row mb-0">
+                                <label style=" text-align:left" class="col-12 col-sm-12 col-md-3 col-xl-3 col-lg-3 col-form-label text-right pb-0" for="MayoriaDeEdad"><b>Mayoría de edad:</b></label>
+                                @{
+                                    var MayoriaDeEdad = Model.MayoriaDeEdad ? "SI" : "No";
+                                }
+                                <label class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-form-label pb-0">@MayoriaDeEdad</label>
+                                <label class="col-12 col-sm-12 col-md-3 col-xl-3 col-lg-3 col-form-label text-right pb-0" for="PadreNombre"><b>Nombre de Padre o Madre:</b></label>
+                                <label class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-form-label pb-0">@Model.PadreNombre</label>
+                            </div>
+                            <div class="form-group row mb-0">
+                                <label class="col-12 col-sm-12 col-md-3 col-xl-3 col-lg-3 col-form-label text-right" for="BienContratado"><b>Bien contratado:</b></label>
+                                <label class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-form-label">@Model.BienContratado</label>
+                                <label class="col-12 col-sm-12 col-md-3 col-xl-3 col-lg-3 col-form-label text-right" for="NombreDelBienContratado"><b>Nombre del Bien Contratado:</b></label>
+                                <label class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-form-label">@Model.NombreDelBienContratado</label>
+                            </div>
+                            <div class="form-group row mb-0">
+                                <label class="col-12 col-sm-12 col-md-3 col-xl-3 col-lg-3 col-form-label text-right pb-0" for="TipoDeInforme"><b>Escuela:</b></label>
+                                <label class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-form-label pb-0">@Model.Escuela</label>
+                            </div>
+                            <div class="form-group row mb-0">
+                                <label class="col-12 col-sm-12 col-md-3 col-xl-3 col-lg-3 col-form-label text-right pb-0" for="TipoDeInforme"><b>Monto Reclamado:</b></label>
+                                <label class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-form-label pb-0">@Model.MontoReclamado</label>
+                            </div>
+                            <div class="form-group row mb-0">
+                                <label class="col-12 col-sm-12 col-md-3 col-xl-3 col-lg-3 col-form-label text-right pb-0" for="TipoDeInforme"><b>Tipo de informe:</b></label>
+                                <label class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-form-label pb-0">@Model.TipoDeInforme</label>
+                            </div>
+                            <div class="form-group row mb-0">
+                                <label class="col-12 col-sm-12 col-md-3 col-xl-3 col-lg-3 col-form-label text-right pb-0" for="Titulo"><b>Pedido:</b></label>
+                                <label class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-form-label pb-0">@Model.Titulo</label>
+                            </div>
+                            <div class="form-group row mb-0">
+                                <label class="col-12 col-sm-12 col-md-3 col-xl-3 col-lg-3 col-form-label text-right pb-0" for="Descripcion"><b>Detalle:</b></label>
+                                <label class="col-12 col-sm-12 col-md-9 col-lg-9 col-xl-9 col-form-label pb-0">@Model.Descripcion</label>
+                            </div>
+                            <hr />
+                            <div class="form-group row mb-0">
+                                <label class="col-12 col-sm-12 col-md-3 col-xl-3 col-lg-3 col-form-label text-right" for="Titulo">Estado:</label>
+                                <div class="col-sm-12 col-sm-12 col-md-9 col-lg-9 col-xl-9">
+                                    <select id="Estado" name="Estado" runat="server" class="form-control form-control-sm">
+                                        <option value="1">Abierto</option>/>
+                                        <option value="2">Cerrado</option>/>
+                                        <option value="3">Spam</option>/>
+                                    </select>
+                                    Si el estado es "Cerrado" se enviara un correo de respuesta.
+                                </div>
+
+                            </div>
+                            <div class="form-group row mb-0">
+                                <label class="col-12 col-sm-12 col-md-3 col-xl-3 col-lg-3 col-form-label text-right" for="Respuesta">Respuesta:</label>
+                                <div class="col-sm-12 col-sm-12 col-md-9 col-lg-9 col-xl-9">
+                                    <textarea class="form-control form-control-sm" id="Respuesta" name="Respuesta" required>@Model.Respuesta</textarea>
+                                    <span class="text-danger field-validation-valid" data-valmsg-for="Respuesta" data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                            <div class="form-group text-right mt-1">
+                                <input type="submit" value="Guardar cambios" class="btn btn-primary" />
+                            </div>
+                        </form>
+                        <div>
+                            <a href="/Solicituds">Regresar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</main>

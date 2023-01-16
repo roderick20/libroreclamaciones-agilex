@@ -1,0 +1,111 @@
+﻿<main style="min-height:500px;">
+    <div class="section overflow-hidden">
+        <div class="container z-2">
+            <h4 style="margin-top: 0.5rem;">Hojas de reclamo</h4>
+            <hr style="margin-top: 0.5rem; margin-bottom: 0.5rem;" />
+            <div class="row">
+                <div class="col-12">
+                    <table class="table table-sm table-bordered " id="listTable2">
+                        <thead>
+                            <tr>
+                                <th>Nro</th>
+                                <th>
+                                    Fecha
+                                </th>
+                                <th>
+                                    Nombre
+                                </th>
+                                <th>
+                                    Apellido
+                                </th>
+                                @*<th>
+            Bien contratado
+        </th>
+        <th>
+            Nombre del bien contratado
+        </th>*@
+                                <th>
+                                    Tipo de informe
+                                </th>
+                                <th>
+                                    Pedido
+                                </th>
+
+                                <th>Estado</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+@section scripts{
+
+
+    <link href="~/lib/DataTables/datatables.min.css" rel="stylesheet" />
+    <script src="~/lib/DataTables/datatables.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var table = $('#listTable2').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "order": [[0, "desc"]],
+                "language": {
+                    "url": "/lib/DataTables/spanish.json"
+                },
+                select: true,
+                "ajax": {
+                    "url": "/Solicituds/IndexData",
+                    "type": "POST",
+                    "data": {}
+                },
+                "columns": [
+                    { "data": "Id" },
+                    { "data": "Fecha" },
+                    { "data": "Name" },
+                    { "data": "Apellidos" },
+                    //{ "data": "Correo" },
+                    //{ "data": "Domicilio" },
+                    //{ "data": "TipoDoc" },
+                    //{ "data": "Documento" },
+                    //{ "data": "Telefono" },
+                    //{ "data": "Enabled" },
+                    //{ "data": "BienContratado" },
+                    //{ "data": "NombreDelBienContratado" },
+                    { "data": "TipoDeInforme" },
+                    { "data": "Titulo" },
+                    //{ "data": "Descripcion" },
+                    
+                    {
+                        "className": "no-wrap text-center",
+                        "render": function (data, type, full, meta) {
+                            if (full.Estado == '1') {
+                                return '<span class="text-danger">Abierto</span>';
+                            }
+                            if (full.Estado == '2') {
+                                return '<span class="text-success">Cerrado</span>';
+                            }
+                            if (full.Estado == '3') {
+                                return '<span class="text-info">Spam</span>';
+                            }
+                        }
+                    },
+                    {
+                        "className": "no-wrap text-center",
+                        "render": function (data, type, full, meta) {
+                            return '<a class="mr-1" href="/Solicituds/Edit/' + full.Id + '" title="Editar"><i class="fas fa-edit text-info"></i></a> ';
+                            //'<a class="mr-1" href="/Solicituds/Details/' + full.Id + '" title="Detalle">Detalle</a>' +
+                            //'<a class="mr-1" href="/Solicituds/Delete/' + full.Id + '" title="Eliminar" ><i class="fas fa-trash-alt text-danger"></i></a>';
+                        }
+                    },
+                ]
+            });
+        });
+    </script>
+}
+

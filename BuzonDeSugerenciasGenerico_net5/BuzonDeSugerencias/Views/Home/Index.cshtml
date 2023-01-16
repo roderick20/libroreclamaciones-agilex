@@ -1,0 +1,286 @@
+﻿@model BuzonDeSugerencias.Models.Solicitud
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.NombreComercial - Hoja de Reclamaciones</title>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="/theme/vendor/@@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
+
+    <meta name="robots" content="noodp" />
+    <link rel="canonical" href="@ViewBag.Url" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="@ViewBag.Url" />
+</head>
+<body>
+    <div class="container">
+        <div class="row mt-3">
+            <div class="col-12 col-sm-12 col-lg-3 col-md-3 col-xl-3">
+                <a href="@ViewBag.Url"><img src="@ViewBag.Logo" style="width: 200px;" /></a>
+            </div>
+            <div class="col-12 col-sm-12 col-lg-9 col-md-9 col-xl-9 text-right"><h3 class="m-3" style="        color: #1d2528 !important;">Hoja de Reclamaciones</h3> </div>
+        </div>
+        <!--2000x200-->
+        <div style="background-image: url(@ViewBag.Banner);
+background-repeat: no-repeat;
+background-position: center top; padding:20px;color:white;margin-top:15px;font-size:1.2rem;">
+
+            Razón Social: @ViewBag.Empresa<br />
+            RUC: @ViewBag.RUC<br />
+            Dirección: @ViewBag.Direcion
+
+        </div>
+        <hr style="        color: #1d2528 !important;" />
+        <div class="row">
+            <div class="col-6">
+                @{
+                    //var format = "dddd, dd {0} MMMM de yyyy";
+                    //var result = DateTime.Now.ToString(format, new System.Globalization.CultureInfo("es-ES"));
+                    var result = DateTime.Now.ToString("D", new System.Globalization.CultureInfo("es-ES"));
+
+                }
+                @result.Substring(0, 1).ToUpper()@result.Substring(1)
+            </div>
+            <div class="col-6 text-right">
+                <a href="/Home/Revision">Revisar el estado del informe </a>
+            </div>
+        </div>
+        <hr style="        color: #1d2528 !important;" />
+        <div class="container" style="min-height:700px">
+            <div class="row">
+                <div class="col-12">
+
+                    @if (ViewBag.Numero != null)
+                    {
+
+                        <p>
+                            Estimado(a) usuario(a):<br>
+                            Su queja o reclamo ha sido presentado. Recibirá respuesta en un plazo no mayor a treinta (30) días calendario.
+                            Dicho plazo podrá ser extendido por otro igual cuando la naturaleza del reclamo lo justifique.<br><br>
+                            (Referencia: art 6.° del Decreto Supremo N.° 011-2011-PCM).
+
+
+                        </p>
+
+                    }
+                    else
+                    {
+
+                <form asp-action="Index">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group row">
+                        <label class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-form-label text-xs-left text-sm-left text-md-left text-lg-right text-xl-right" for="Nombres">Nombres:</label>
+                        <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                            <input class="form-control form-control-sm" type="text" data-val="true" data-val-required="Campo es obligatorio" id="Nombres" name="Nombres" value="@Model.Nombres" />
+                            <span class="text-danger field-validation-valid" data-valmsg-for="Nombres" data-valmsg-replace="true"></span>
+                        </div>
+                        <label class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-form-label text-xs-left text-sm-left text-md-left text-lg-right text-xl-right" for="Apellidos">Apellido Paterno:</label>
+                        <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                            <input class="form-control form-control-sm" type="text" data-val="true" data-val-required="Campo es obligatorio" id="ApellidoPaterno" name="ApellidoPaterno" value="@Model.ApellidoPaterno" />
+                            <span class="text-danger field-validation-valid" data-valmsg-for="ApellidoPaterno" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-form-label text-xs-left text-sm-left text-md-left text-lg-right text-xl-right" for="Apellidos">Apellido Materno:</label>
+                        <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                            <input class="form-control form-control-sm" type="text" data-val="true" data-val-required="Campo es obligatorio" id="ApellidoMaterno" name="ApellidoMaterno" value="@Model.ApellidoMaterno" />
+                            <span class="text-danger field-validation-valid" data-valmsg-for="ApellidoMaterno" data-valmsg-replace="true"></span>
+                        </div>
+                        <label class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-form-label text-xs-left text-sm-left text-md-left text-lg-right text-xl-right" for="Correo">Correo Electrónico: </label>
+                        <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                            <input class="form-control form-control-sm" type="email" data-val="true" data-val-required="Campo es obligatorio" id="Correo" name="Correo" value="@Model.Correo" />
+                            <span class="text-danger field-validation-valid" data-valmsg-for="Correo" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">                       
+
+                        <label class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-form-label text-xs-left text-sm-left text-md-left text-lg-right text-xl-right" for="Telefono">Teléfono / Celular:</label>
+                        <div class="col-sm-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                            <input class="form-control form-control-sm" type="number" data-val="true" data-val-required="Campo es obligatorio" id="Telefono" name="Telefono" value="@Model.Telefono" />
+                            <span class="text-danger field-validation-valid" data-valmsg-for="Telefono" data-valmsg-replace="true"></span>
+                        </div>
+                        <label class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-form-label text-xs-left text-sm-left text-md-left text-lg-right text-xl-right" for="Domicilio">Domicilio:</label>
+                        <div class="col-sm-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                            <input class="form-control form-control-sm" type="text" data-val="true" data-val-required="Campo es obligatorio" id="Domicilio" name="Domicilio" value="@Model.Domicilio" />
+                            <span class="text-danger field-validation-valid" data-valmsg-for="Domicilio" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-form-label text-xs-left text-sm-left text-md-left text-lg-right text-xl-right" for="TipoDoc">Tipo de Documento:</label>
+                        <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                            <select id="TipoDoc" name="TipoDoc" runat="server" class="form-control form-control-sm">
+                                <option value="1">DNI</option>/>
+                                <option value="2">Carnet de Extranjería</option>/>
+                            </select>
+                        </div>
+                        <label class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-form-label text-xs-left text-sm-left text-md-left text-lg-right text-xl-right" for="Dni">Documento:</label>
+                        <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                            <input class="form-control form-control-sm" type="text" data-val="true" data-val-required="Campo es obligatorio" id="Dni" name="Dni" value="@Model.Dni" />
+                            <span class="text-danger field-validation-valid" data-valmsg-for="Dni" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label style=" text-align:left" class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-form-label text-xs-left text-sm-left text-md-left text-lg-right text-xl-right" for="MayoriaDeEdad">Mayoría de edad:</label>
+                        <div class="col-sm-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                            <select id="MayoriaDeEdad" name="MayoriaDeEdad" runat="server" class="form-control form-control-sm">
+                                <option value="true">SI</option>/>
+                                <option value="false">NO</option>/>
+                            </select>
+                        </div>
+                        <label class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-form-label text-xs-left text-sm-left text-md-left text-lg-right text-xl-right" for="PadreNombre" id="labelPadreNombre">Nombre de Padre o Madre:</label>
+                        <div class="col-sm-12 col-sm-12 col-md-3 col-lg-3 col-xl-3" id="divPadreNombre">
+                            <input class="form-control form-control-sm" type="text" id="PadreNombre" name="PadreNombre" value="@Model.PadreNombre" />
+                            <span class="text-danger field-validation-valid" data-valmsg-for="PadreNombre" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-form-label text-xs-left text-sm-left text-md-left text-lg-right text-xl-right" for="BienContratado">Bien contratado:</label>
+                        <div class="col-sm-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                            <select id="BienContratado" name="BienContratado" runat="server" class="form-control form-control-sm">
+                                <option value="Servicio">Servicio</option>/>
+                                <option value="Producto">Producto</option>/>
+                            </select>
+                            <span class="text-danger field-validation-valid" data-valmsg-for="BienContratado" data-valmsg-replace="true"></span>
+                        </div>
+
+                        <label class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-form-label text-xs-left text-sm-left text-md-left text-lg-right text-xl-right" for="NombreDelBienContratado">Nombre del Bien Contratado:</label>
+                        <div class="col-sm-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                            <input class="form-control form-control-sm" type="text" data-val="true" data-val-required="Campo es obligatorio" id="NombreDelBienContratado" name="NombreDelBienContratado" value="@Model.NombreDelBienContratado" />
+                            <span class="text-danger field-validation-valid" data-valmsg-for="NombreDelBienContratado" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-form-label text-xs-left text-sm-left text-md-left text-lg-right text-xl-right" for="Escuela">Escuela Profesional/ Otra Unidad:</label>
+                        <div class="col-sm-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                            <input class="form-control form-control-sm" type="text" id="Escuela" name="Escuela" value="@Model.Escuela" />
+                            <span class="text-danger field-validation-valid" data-valmsg-for="Escuela" data-valmsg-replace="true"></span>
+                        </div>
+
+                        <label class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-form-label text-xs-left text-sm-left text-md-left text-lg-right text-xl-right" for="MontoReclamado">Monto Reclamado:</label>
+                        <div class="col-sm-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                            <input class="form-control form-control-sm" type="text" id="MontoReclamado" name="MontoReclamado" value="@Model.MontoReclamado" />
+                            <span class="text-danger field-validation-valid" data-valmsg-for="BienContratado" data-valmsg-replace="true"></span>
+                        </div>
+
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-form-label text-xs-left text-sm-left text-md-left text-lg-right text-xl-right" for="TipoDeInforme">Tipo de informe:</label>
+                        <div class="col-sm-12 col-sm-12 col-md-9 col-lg-9 col-xl-9">
+                            <select id="TipoDeInforme" name="TipoDeInforme" runat="server" class="form-control form-control-sm">
+                                <option value="Queja">Queja</option>/>
+                                <option value="Reclamo">Reclamo</option>/>
+                            </select>
+                            <span class="text-danger field-validation-valid" data-valmsg-for="TipoDeInforme" data-valmsg-replace="true"></span>
+                            <p>
+                                <b>Reclamo:</b> Disconformidad relacionada a los productos o servicios.<br />
+                                <b>Queja:</b> Disconformidad no relacionada a los productos o servicios; o, malestar o descontento respecto a la atención al público.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-form-label text-xs-left text-sm-left text-md-left text-lg-right text-xl-right" for="Titulo">Pedido:</label>
+                        <div class="col-sm-12 col-sm-12 col-md-9 col-lg-9 col-xl-9">
+                            <input class="form-control form-control-sm" type="text" data-val="true" data-val-required="Campo es obligatorio" id="Titulo" name="Titulo" value="@Model.Titulo" />
+                            <span class="text-danger field-validation-valid" data-valmsg-for="Titulo" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-form-label text-xs-left text-sm-left text-md-left text-lg-right text-xl-right" for="Descripcion">Detalle:</label>
+                        <div class="col-sm-12 col-sm-12 col-md-9 col-lg-9 col-xl-9">
+                            <textarea class="form-control form-control-sm" data-val="true" data-val-required="Campo es obligatorio" id="Descripcion" name="Descripcion">@Model.Descripcion</textarea>
+                            <span class="text-danger field-validation-valid" data-valmsg-for="Descripcion" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                    @*<div class="form-group row">
+            <label class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-form-label text-xs-left text-sm-left text-md-left text-lg-right text-xl-right" for="Descripcion">Detalle:</label>
+            <div class="col-sm-12 col-sm-12 col-md-9 col-lg-9 col-xl-9 mt-2">
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="checkbox-signin" name="terminos" required>
+                    <label class="custom-control-label" for="checkbox-signin">Estoy de acuerdo con los </label><span data-toggle="modal" data-target="#bs-example-modal-lg" class="text-info" style="cursor:pointer;"> Terminos y Condiciones</span>
+                    <span class="text-danger field-validation-valid" data-valmsg-for="Titulo" data-valmsg-replace="true"></span>
+                </div>
+                <div class="modal fade" id="bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myLargeModalLabel">Terminos y Condiciones</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            </div>
+                            <div class="modal-body">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+                    <div class="form-group row">
+                        <label class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-form-label text-right"></label>
+                        <div class="col-12 col-sm-12 col-md-5 col-lg-4 col-xl-4 mt-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <img id="img-captcha" src="/get-captcha-image" />
+                                </div>
+                                <input type="text" class="form-control" placeholder="(*) Captcha Code" name="CaptchaCode" maxlength="4" required />
+                                <div class="input-group-prepend">
+                                    <span id="img-captcha-b" class="btn btn-primary"><i class="fas fa-sync-alt"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-4 col-lg-5 col-xl-5 mt-2  text-right">
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Enviar</button>
+                        </div>
+                    </div>
+
+                </form>
+                    }
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <footer class="border-top footer text-muted pt-5 pb-5" style="background-color: #1d2528;">
+        <div class="container" text-align="right">
+            ©2021 @ViewBag.NombreComercial. Todos los derechos reservados.
+            
+        </div>
+    </footer>
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/site.js?v=4q1jwFhaPaZgr8WAUSrux6hAuh0XDg9kPS3xIVq36I0"></script>
+
+    <script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $("#labelPadreNombre").hide();
+            $("#divPadreNombre").hide();
+
+            $("#img-captcha-b").click(function () {
+                d = new Date();
+                $("#img-captcha").attr("src", "/get-captcha-image?" + d.getTime());
+            });
+
+            $("#MayoriaDeEdad").change(function () {
+                if ($("#MayoriaDeEdad").val() == 'true') {
+                    $("#labelPadreNombre").hide();
+                    $("#divPadreNombre").hide();
+                }
+                else {
+                    $("#labelPadreNombre").show();
+                    $("#divPadreNombre").show();
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
+
