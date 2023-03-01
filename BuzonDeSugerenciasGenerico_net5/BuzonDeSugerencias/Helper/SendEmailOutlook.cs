@@ -32,7 +32,7 @@ namespace BuzonDeSugerencias.Helper
             try
             {
                 String CorreoEnvio = "reclamos@ucsm.edu.pe";
-                String CorreoPassword = "Libro?20Pwd21";
+                String CorreoPassword = "2023&%H0j@";
 
                 MailMessage mM = new MailMessage();
                 mM.From = new MailAddress(CorreoEnvio, "LIBRO DE RECLAMACIONES UCSM");
